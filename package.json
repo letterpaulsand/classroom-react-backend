@@ -1,0 +1,24 @@
+{
+  "name": "classroomeditor-backend",
+  "version": "1.0.0",
+  "description": "https://classroomeditor.tk",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "json": "json-server --watch db.json"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/is-empty": "^1.2.1",
+    "@types/lowdb": "^1.0.11",
+    "@types/node": "^18.7.23",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "is-empty": "^1.2.0",
+    "lowdb": "^3.0.0",
+    "moment-timezone": "^0.5.37",
+    "uuid": "^9.0.0"
+  },
+  "type": "module"
+}
