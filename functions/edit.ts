@@ -19,6 +19,7 @@ interface Type {
 
 interface Data{
     message: string,
+    name: string,
     date: string,
     status: boolean,
     time: string
@@ -45,19 +46,28 @@ async function edit(data: Edit, time: Time) {
     await db.read()
     let typeAllData = db.data?.type
     let myTypeProfileArray = typeAllData?.filter(item => item.name === data.name)
-    if(empty(myTypeProfileArray) || myTypeProfileArray == undefined){
+    if(empty(myTypeProfileArray) || myTypeProfileArray === undefined){
         // name repeat
         return status(404, 'user not found')
     }
     let myTypeProfile = myTypeProfileArray[0]
-    if(empty(myTypeProfile.date) || myTypeProfile.date[myTypeProfile.date.length-1] !== time.formatted){
-        /*
-        *
-        * 
-        * HERE.............
-        * 
-        */
+    if(myTypeProfile.password !== data.password){
+        return status(403, 'password incorrect')
     }
+    let myTypeProfileIndex = typeAllData?.indexOf(myTypeProfile)
+    if(empty(myTypeProfile.date) || myTypeProfile.date[myTypeProfile.date.length-1] !== time.formatted){
+        if(myTypeProfileIndex === undefined){
+            return status(500, 'server error')
+        }
+        db.data?.type[myTypeProfileIndex].date.push(time.formatted)
+    }
+    db.data?.data.push({
+        message: data.message,
+        name: data.name,
+        date: time.formatted,
+        status: true,
+        time: time.normalFormat
+    })
     db.write()
     return status(200, 'success')
 }

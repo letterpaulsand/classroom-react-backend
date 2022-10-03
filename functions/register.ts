@@ -18,6 +18,7 @@ interface Type {
 
 interface Data{
     message: string,
+    name: string,
     date: string,
     status: boolean,
     time: string
