@@ -35,3 +35,30 @@ On this page, you can create some incredible notifications about who you want to
 ## look
 
 If it redirects to the class setting page, you just need to enter your "class" and navigate to the look page again, and it will present correctly.
+
+## installation
+
+1. create file
+
+    ```text
+    .env
+    db.json
+    ```
+
+1. config file
+    - .env
+
+        ```text
+        TIME_ZONE=Region/city
+        ```
+
+    - db.json
+
+        ```text
+        {
+            "type":[],
+            "data": []
+        }
+        ```
+
+1. run `npm start`

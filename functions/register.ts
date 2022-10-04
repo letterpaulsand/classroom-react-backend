@@ -20,6 +20,7 @@ interface Data{
     message: string,
     name: string,
     date: string,
+    uuid: string,
     status: boolean,
     time: string
 }

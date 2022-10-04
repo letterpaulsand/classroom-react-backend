@@ -1,5 +1,6 @@
 import { join, resolve } from 'path'
 import { Low, JSONFile } from 'lowdb'
+import { v4 as uuidv4 } from 'uuid';
 import empty from "is-empty"
 import status from "./status.js"
 
@@ -21,6 +22,7 @@ interface Data{
     message: string,
     name: string,
     date: string,
+    uuid: string,
     status: boolean,
     time: string
 }
@@ -65,6 +67,7 @@ async function edit(data: Edit, time: Time) {
         message: data.message,
         name: data.name,
         date: time.formatted,
+        uuid: uuidv4(),
         status: true,
         time: time.normalFormat
     })
