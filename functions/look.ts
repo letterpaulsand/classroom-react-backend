@@ -22,7 +22,8 @@ interface Type {
     date: string[]
 }
 
-interface Data {
+interface Data{
+    email: string,
     message: string,
     name: string,
     date: string,
@@ -53,17 +54,20 @@ async function look(data: Look) {
         return status(404, 'user not found')
     }
     let myTypeProfile = myTypeProfileArray[0]
-    // if(myTypeProfile.date.length - 1 + data.number < myTypeProfile.date.length)
-    // I want to add the if to check over range
-    let myTypeProfileDate = myTypeProfile.date[myTypeProfile.date.length - 1 + data.number]
+    if(-data.number > myTypeProfile.date.length - 1){
+        return status(404, 'over range')
+    }
+    let myTypeProfileDate = myTypeProfile.date[-data.number]
     let dataAllData = db.data?.data
     if (empty(dataAllData) || dataAllData === undefined) {
         return status(500, 'server error')
     }
     // when it get the expectation data, and detect it jump out to another day.
     let resultData: ResultData[] = []
+    let dateExpiration = false
     for (let i = dataAllData?.length - 1; i >= -1; i--) {
         if (i !== -1 && dataAllData[i].date === myTypeProfileDate) {
+            dateExpiration = true
             if (dataAllData[i].name === data.name) {
                 resultData.push({
                     message: dataAllData[i].message,
@@ -72,12 +76,15 @@ async function look(data: Look) {
                 })
             }
         } else {
+            if(!dateExpiration) continue
+            if(empty(dataAllData) || dataAllData === undefined){
+                return status(500, 'server error')
+            }
             let resultObj = {
                 date: dataAllData[i + 1].date,
                 data: resultData
             }
             return status(200, 'success', [resultObj])
-
         }
     }
 

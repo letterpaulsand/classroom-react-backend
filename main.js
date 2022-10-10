@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import register from "./lib/register.js"
 import edit from "./lib/edit.js"
 import look from "./lib/look.js"
+import change from "./lib/change.js"
 import moment from "moment-timezone"
 const app = express()
 dotenv.config()
@@ -29,6 +30,9 @@ app.post('/edit', async (req, res)=>{
 
 app.post('/look', async (req, res)=>{
     res.json(await look(req.body))
+})
+app.post('/change', async (req, res)=>{
+    res.json(await change(req.body))
 })
 
 app.listen(3030, ()=>{

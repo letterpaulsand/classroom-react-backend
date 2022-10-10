@@ -4,8 +4,7 @@
   "description": "https://classroomeditor.tk",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js",
-    "json": "json-server --watch db.json"
+    "start": "node main.js"
   },
   "author": "",
   "license": "MIT",

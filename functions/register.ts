@@ -17,6 +17,7 @@ interface Type {
 }
 
 interface Data{
+    email: string,
     message: string,
     name: string,
     date: string,

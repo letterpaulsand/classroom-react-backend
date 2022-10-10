@@ -19,6 +19,7 @@ interface Type {
 }
 
 interface Data{
+    email: string,
     message: string,
     name: string,
     date: string,
@@ -61,9 +62,10 @@ async function edit(data: Edit, time: Time) {
         if(myTypeProfileIndex === undefined){
             return status(500, 'server error')
         }
-        db.data?.type[myTypeProfileIndex].date.push(time.formatted)
+        db.data?.type[myTypeProfileIndex].date.unshift(time.formatted)
     }
     db.data?.data.push({
+        email: myTypeProfile.email,
         message: data.message,
         name: data.name,
         date: time.formatted,
